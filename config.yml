@@ -1,0 +1,54 @@
+# À personnaliser avant utilisation : remplacer VOTRE_COMPTE et renseigner base_url.
+backend:
+  name: github
+  repo: VOTRE_COMPTE/4tvisuals
+  branch: main
+  # base_url: https://VOTRE-SERVICE-OAUTH.example
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+locale: fr
+publish: true
+collections:
+  - name: "contenu"
+    label: "Contenu du site"
+    files:
+      - name: "site"
+        label: "Pages et projets"
+        file: "content.json"
+        format: json
+        fields:
+          - label: "Réglages du site"
+            name: site
+            widget: object
+            fields:
+              - {label: "Accroche d'accueil", name: tagline, widget: string}
+              - {label: "Introduction", name: intro, widget: string}
+              - {label: "À propos", name: about, widget: text}
+              - {label: "Email", name: email, widget: string}
+              - {label: "Vidéo d'accueil (URL MP4)", name: heroVideo, widget: string, required: false}
+              - {label: "Image de couverture d'accueil", name: heroPoster, widget: image}
+          - label: "Projets"
+            name: projects
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - {label: "Identifiant URL (unique, sans espaces)", name: slug, widget: string}
+              - {label: "Titre", name: title, widget: string}
+              - label: "Portfolio"
+                name: type
+                widget: select
+                options: [{label: "Films", value: film}, {label: "Photographie", value: photo}]
+              - {label: "Catégorie", name: category, widget: string}
+              - label: "Mise en page"
+                name: layout
+                widget: select
+                options: [{label: "Cinématographique", value: cinema}, {label: "Éditoriale", value: editorial}]
+              - {label: "À la une", name: featured, widget: boolean, default: false}
+              - {label: "Couverture", name: cover, widget: image}
+              - {label: "Description", name: description, widget: text}
+              - {label: "Lien vidéo (YouTube/Vimeo/autre)", name: video, widget: string, required: false}
+              - label: "Galerie"
+                name: gallery
+                widget: list
+                required: false
+                field: {label: "Image", name: image, widget: image}
